@@ -5,7 +5,7 @@ package ScheiBig.PS.UDPChat.Messages
  * @property nickname Nickname that is being registered
  * @constructor Creates message with specified nickname
  */
-internal open class SetNickChatMessage(override val nickname: String) : NickChatMessage() {
+internal open class SetNickChatMessage(nickname: String) : NickChatMessage(nickname) {
     /**
      * Returns a string representation of the message
      * @return "NICK [nickname]"

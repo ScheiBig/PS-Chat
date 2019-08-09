@@ -6,8 +6,8 @@ package ScheiBig.PS.UDPChat.Messages
  * @property nickname Nickname of user joining into chatroom
  * @constructor Creates message with specified [roomname] and [nickname]
  */
-internal class JoinRoomNickChatMessage(override val roomname: String,
-                              override val nickname: String) : RoomNickChatMessage() {
+internal class JoinRoomNickChatMessage(roomname: String,
+                              nickname: String) : RoomNickChatMessage(roomname, nickname) {
     /**
      * Returns a string representation of the message
      * @return "JOIN [roomname] [nickname]"

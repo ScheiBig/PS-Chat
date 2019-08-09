@@ -7,9 +7,9 @@ package ScheiBig.PS.UDPChat.Messages
  * @property message Message that is being send
  * @constructor Creates message with specified [roomname], [nickname] and [message]
  */
-internal class MessageRoomNickChatMessage(override val roomname: String,
-                                 override val nickname: String,
-                                 val message: String) : RoomNickChatMessage() {
+internal class MessageRoomNickChatMessage(roomname: String,
+                                 nickname: String,
+                                 val message: String) : RoomNickChatMessage(roomname, nickname) {
     /**
      * Returns a string representation of the message
      * @return "MSG [roomname] [nickname] [message]"

@@ -6,8 +6,8 @@ package ScheiBig.PS.UDPChat.Messages
  * @property nickname Nickname of user leaving the chatroom
  * @constructor Creates message with specified [roomname] and [nickname]
  */
-internal class LeaveRoomNickChatMessage(override val roomname: String,
-                               override val nickname: String) : RoomNickChatMessage() {
+internal class LeaveRoomNickChatMessage(roomname: String,
+                               nickname: String) : RoomNickChatMessage(roomname, nickname) {
     /**
      * Returns a string representation of the message
      * @return "LEAVE [roomname] [nickname]"
