@@ -9,7 +9,6 @@ import kotlin.concurrent.withLock
 
 class ChatMessenger(private val socket: MulticastSocket): Thread(), Shutdownable {
 
-
     private val lock = ReentrantLock()
     private val condition = lock.newCondition()
 
@@ -37,7 +36,6 @@ class ChatMessenger(private val socket: MulticastSocket): Thread(), Shutdownable
                 val packet = MainThread.packetCreator.getPacket(message.toString())
                 try {
                     socket.send(packet)
-                    println("Sent: $message")
                 } catch (e: IOException) {
                     printlnErr(MainThread.IOExMsg)
                     break

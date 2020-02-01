@@ -16,9 +16,9 @@ abstract class ChatMessage {
             val unknownParametersException = java.lang.IllegalArgumentException("Unknown message type")
 
             val splitMessage = message.split(Regex(" "))
-            when (splitMessage.first()) {
+            return when (splitMessage.first()) {
                 "NICK" -> {
-                    return if (splitMessage.last() == "BUSY") {
+                    if (splitMessage.last() == "BUSY") {
                         if (splitMessage.size != 3) throw badNumberParametersEx
                         BusyNickChatMessage(splitMessage[1])
                     } else {
@@ -28,22 +28,26 @@ abstract class ChatMessage {
                 }
                 "JOIN" -> {
                     if (splitMessage.size != 3) throw badNumberParametersEx
-                    return JoinRoomNickChatMessage(splitMessage[1], splitMessage[2])
+                    JoinRoomNickChatMessage(splitMessage[1], splitMessage[2])
                 }
                 "LEAVE" -> {
                     if (splitMessage.size != 3) throw badNumberParametersEx
-                    return JoinRoomNickChatMessage(splitMessage[1], splitMessage[2])
+                    LeaveRoomNickChatMessage(splitMessage[1], splitMessage[2])
                 }
                 "MSG" -> {
                     if (splitMessage.size <= 3) throw badNumberParametersEx
-                    return MessageRoomNickChatMessage(
+                    MessageRoomNickChatMessage(
                         splitMessage[1], splitMessage[2],
-                        splitMessage.subList(3, splitMessage.lastIndex).joinToString(" ")
+                        splitMessage.subList(3, splitMessage.size).joinToString(" ")
                     )
+                }
+                "ROOM" -> {
+                    if (splitMessage.size != 3) throw badNumberParametersEx
+                    RoomRoomNickChatMessage(splitMessage[1], splitMessage[2])
                 }
                 "WHOIS" -> {
                     if (splitMessage.size != 2) throw badNumberParametersEx
-                    return WhoisRoomChatMessage(splitMessage[1])
+                    WhoisRoomChatMessage(splitMessage[1])
                 }
                 else -> throw unknownParametersException
             }
