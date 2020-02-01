@@ -1,8 +1,7 @@
-@file:JvmName("ExtensionsKt")
+@file:JvmName("Extensions")
 
 package ScheiBig.PS.UDPChat
 
-import java.lang.IllegalArgumentException
 import java.net.DatagramPacket
 import java.net.InetAddress
 
@@ -14,6 +13,29 @@ fun printErr(message: Any?) {
 /** Prints the given [message] and the line separator to the standard error stream. */
 fun printlnErr(message: Any?) {
     System.err.println(message)
+}
+
+/** Prints the given debug-[message] to the standard output stream. */
+@Deprecated("Remember to cleanup debug messages from final code")
+fun debugPrint(message: Any?) {
+    print("$##   $message   ###$")
+    if (!RemainingDebugPrinterException.CleanUpDebug)
+        throw RemainingDebugPrinterException()
+}
+
+/** Prints the given debug-[message] and the line separator to the standard output stream. */
+@Deprecated("Remember to cleanup debug messages from final code")
+fun debugPrintln(message: Any?) {
+    println("$##   $message   ###$")
+    if (!RemainingDebugPrinterException.CleanUpDebug)
+        throw RemainingDebugPrinterException()
+}
+
+class RemainingDebugPrinterException(): RuntimeException() {
+
+    companion object {
+        val CleanUpDebug = true
+    }
 }
 
 class DatagramPacketCreator(val address: InetAddress, val port: Int) {
